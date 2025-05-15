@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom'; // Add Link import
 import { Box, TextField, Button, Typography, Paper } from '@mui/material';
 
 const LoginPage: React.FC = () => {
@@ -31,11 +31,11 @@ const LoginPage: React.FC = () => {
       }}
     >
       <Paper sx={{ p: 4, width: 400 }}>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h4" gutterBottom align="center">
           Login
         </Typography>
         {error && (
-          <Typography color="error" gutterBottom>
+          <Typography color="error" gutterBottom align="center">
             {error}
           </Typography>
         )}
@@ -66,6 +66,16 @@ const LoginPage: React.FC = () => {
             Login
           </Button>
         </form>
+        
+        {/* Add registration link */}
+        <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+          Don't have an account?{' '}
+          <Link to="/register" style={{ textDecoration: 'none' }}>
+            <Button variant="text" color="primary" size="small">
+              Register here
+            </Button>
+          </Link>
+        </Typography>
       </Paper>
     </Box>
   );

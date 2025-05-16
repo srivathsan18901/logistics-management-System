@@ -66,10 +66,11 @@ const RegisterPage: React.FC = () => {
     try {
       await register(formData.username, formData.password, formData.role);
       navigate('/');
-    } catch (err) {
+    } catch (error: any) {
+      console.error('Registration error:', error);
       setErrors({
         ...errors,
-        form: (err as Error).message || 'Registration failed. Please try again.'
+        form: error.message || 'Registration failed. Please try again.'
       });
     } finally {
       setIsSubmitting(false);

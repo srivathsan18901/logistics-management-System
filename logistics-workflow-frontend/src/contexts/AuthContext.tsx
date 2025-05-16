@@ -41,10 +41,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   const register = async (username: string, password: string, role: string) => {
-    const { token: authToken, user: userData } = await AuthService.register(username, password, role);
-    localStorage.setItem('token', authToken);
-    setToken(authToken);
-    setUser(userData);
+    try {
+      const { token: authToken, user: userData } = await AuthService.register(username, password, role);
+      localStorage.setItem('token', authToken);
+      setToken(authToken);
+      setUser(userData);
+    } catch (error) {
+      console.error('Registration error:', error);
+      throw error; // Re-throw to be caught in the component
+    }
   };
 
   const logout = () => {
